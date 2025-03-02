@@ -54,8 +54,8 @@ def draw_barplots(merged_df, types, color_mapping):
 
         ax.set_xticks(range(0, 17))
         ax.set_xticklabels([(x + 1) * 15 for x in ax.get_xticks()])
-        ax.set_ylim(0, 100) # FIXME: find dynamic way to draw y-axis
-        ax.set_yticks(range(0, 100, 10))
+        ax.set_ylim(0, 60) # FIXME: find dynamic way to draw y-axis, but 60 is ok for n=200
+        ax.set_yticks(range(0, 60, 5))
 
     plt.tight_layout()  
 
