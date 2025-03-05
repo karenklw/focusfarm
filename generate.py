@@ -69,7 +69,7 @@ def draw(combined_df, n, folder):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
-        description="Generates synthetic dataset using the manually defined business rules of player types."
+        description="Generates synthetic dataset using the defined heuristics of player types."
     )
     parser.add_argument(
         "-n",
@@ -110,8 +110,7 @@ if __name__ == "__main__":
 
     if showPlot:
         draw(combined_df, n, folder)
-
-    print(f"Saved visualizations to {folder}")
+        print(f"Saved visualizations to {folder}")
 
     print("done :D")
 
