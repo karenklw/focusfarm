@@ -223,7 +223,7 @@ if __name__ == "__main__":
         print(f"Saved synthesizer to {os.path.dirname(f)}/synthesizer.pkl")
     
     synthetic_data = synth.sample( 
-        num_sequences=n*4, # try to ensure PAR produces enough sequences to sample n from (doesn't gaurantee, see *balance*)
+        num_sequences=n*5, # try to ensure PAR produces enough sequences to sample n from (doesn't gaurantee, see *balance*)
         sequence_length=None # default = None (auto determine sequence lengths)
     )
 
