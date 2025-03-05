@@ -28,6 +28,7 @@ def draw_boxplot(merged_df, color_mapping):
     bp.set_yticklabels([int(y * 15) for y in yticks]) # display in 15-min intervals
 
     plt.title('')
+    plt.suptitle('')
     plt.xlabel('Player Type')
     plt.ylabel('Session Length (minutes)')
 
