@@ -55,7 +55,7 @@ def adjust_diversion(row, rng: np.random.Generator):
     if time == 0:
         row['NumDiverted'] = 0
         row['FirstDiversion'] = 'none'
-    return row
+        return row
 
     # if TimeDiverted > 0 --> NumDiverted > 0 and FirstDiversion != 'none'
     # FirstDiversion can be 'friends'; adjust probs same as rules.py
@@ -104,15 +104,18 @@ def adjust_diversion(row, rng: np.random.Generator):
 
 def balance(df, k: int, rng: np.random.Generator):
     ret = []
+    num_avail = k
     
     for type_ in df['Type'].unique():
         type_df = df[df['Type'] == type_]
 
         unique_sessions = type_df['Session'].drop_duplicates()
-        num_avail = min(k, len(unique_sessions)) # sometimes PAR produces a really unbalanced dataset
+        num_avail = min(num_avail, len(unique_sessions)) # sometimes PAR produces a really unbalanced dataset
 
-        # sampled_sessions = type_df['Session'].drop_duplicates().sample(n=k, random_state=rng)
-        sampled_sessions = unique_sessions.sample(n=num_avail, random_state=rng)
+    for type_ in df['Type'].unique():
+        type_df = df[df['Type'] == type_]
+
+        sampled_sessions = type_df['Session'].drop_duplicates().sample(n=num_avail, random_state=rng)
         sampled_df = type_df[type_df['Session'].isin(sampled_sessions)]
         ret.append(sampled_df)
     
