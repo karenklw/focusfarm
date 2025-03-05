@@ -214,12 +214,12 @@ if __name__ == "__main__":
     # if p option is set, load synthesizer
     else:
         synth = PARSynthesizer.load(filepath=pkl)
-        synth.fit(sample)
-        
+        synth.fit(sample) # reproducible only if using the same synthesizer fitted on the same dataset
+
         synth.save(f'{os.path.dirname(f)}/synthesizer.pkl')
         print(f"Saved synthesizer to {os.path.dirname(f)}/synthesizer.pkl")
     
-    synthetic_data = synth.sample( # reproducible only if using the same synthesizer
+    synthetic_data = synth.sample( 
         num_sequences=n*4, # try to ensure PAR produces enough sequences to sample n from (doesn't gaurantee, see *balance*)
         sequence_length=None # default = None (auto determine sequence lengths)
     )
