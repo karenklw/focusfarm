@@ -192,11 +192,11 @@ if __name__ == "__main__":
     seed = args.seed
     showPlot = args.plot
 
+    
+    sample = pd.read_csv(f)
+    sample_md = make_meta(sample)
 
     if pkl is None:
-        sample = pd.read_csv(f)
-        sample_md = make_meta(sample)
-
         synth = PARSynthesizer(
             sample_md,
             enforce_min_max_values=True, # default = True
@@ -214,6 +214,10 @@ if __name__ == "__main__":
     # if p option is set, load synthesizer
     else:
         synth = PARSynthesizer.load(filepath=pkl)
+        synth.fit(sample)
+        
+        synth.save(f'{os.path.dirname(f)}/synthesizer.pkl')
+        print(f"Saved synthesizer to {os.path.dirname(f)}/synthesizer.pkl")
     
     synthetic_data = synth.sample( # reproducible only if using the same synthesizer
         num_sequences=n*4, # try to ensure PAR produces enough sequences to sample n from (doesn't gaurantee, see *balance*)
